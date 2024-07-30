@@ -29,4 +29,3 @@ class CustomClickOptionFrame(CTkFrame):
         self.click_type_label.grid(row=1, column=0, pady=10, padx=(10, 0), sticky="w")
         self.mouse_button_dropdown.grid(row=0, column=1, pady=(0, 10), padx=(0, 10), sticky="e")
         self.click_type_dropdown.grid(row=1, column=1, pady=(0, 10), padx=(0, 10), sticky="e")
-

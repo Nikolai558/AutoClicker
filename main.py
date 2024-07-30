@@ -1,6 +1,5 @@
 import customtkinter
 from CustomFrames import CustomClickIntervalFrame, CustomClickOptionFrame, CustomClickRepeatFrame, CustomCursorPositionFrame, CustomActionFrame
-from CustomWidgets import CustomTKEntry
 
 
 class App(customtkinter.CTk):

@@ -1,4 +1,4 @@
-from customtkinter import CTkFrame, CTkRadioButton, CTkLabel, CTkButton
+from customtkinter import CTkFrame, CTkButton
 
 
 class CustomActionFrame(CTkFrame):
@@ -28,4 +28,3 @@ class CustomActionFrame(CTkFrame):
 
         self.stop_button.grid(row=0, column=1, padx=(20, 20))
         self.record_playback_button.grid(row=1, column=1, padx=(20, 20), pady=(0, 10))
-

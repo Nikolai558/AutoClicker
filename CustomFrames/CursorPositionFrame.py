@@ -36,7 +36,3 @@ class CustomCursorPositionFrame(CTkFrame):
         self.x_entry.grid(row=0, column=4, padx=(10, 0), pady=(0, 0), sticky="e")
         self.y_label.grid(row=0, column=5, padx=(10, 0), pady=(0, 0), sticky="e")
         self.y_entry.grid(row=0, column=6, padx=(10, 6), pady=(0, 0), sticky="e")
-
-
-
-
