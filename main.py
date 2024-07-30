@@ -1,5 +1,5 @@
 import customtkinter
-from CustomFrames import CustomClickIntervalFrame, CustomClickOptionFrame, CustomClickRepeatFrame, CustomCursorPositionFrame
+from CustomFrames import CustomClickIntervalFrame, CustomClickOptionFrame, CustomClickRepeatFrame, CustomCursorPositionFrame, CustomActionFrame
 from CustomWidgets import CustomTKEntry
 
 
@@ -24,6 +24,9 @@ class App(customtkinter.CTk):
 
         self.cursor_position_frame = CustomCursorPositionFrame(self)
         self.cursor_position_frame.grid(column=0, row=2, padx=(10, 0), pady=5, ipadx=10, ipady=10, sticky="nw", columnspan=2)
+
+        self.action_frame = CustomActionFrame(self)
+        self.action_frame.grid(column=0, row=3, padx=(10, 0), pady=5, ipadx=10, ipady=10, columnspan=2, sticky="nsw")
 
 
 def main():
