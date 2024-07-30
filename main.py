@@ -1,5 +1,5 @@
 import customtkinter
-from CustomFrames import CustomClickIntervalFrame
+from CustomFrames import CustomClickIntervalFrame, CustomClickOptionFrame
 from CustomWidgets import CustomTKEntry
 
 
@@ -13,7 +13,10 @@ class App(customtkinter.CTk):
         self.geometry(f'{self.WIDTH}x{self.HEIGHT}')
 
         self.click_interval_frame = CustomClickIntervalFrame(self)
-        self.click_interval_frame.grid(column=0, row=0, padx=10, pady=10, ipadx=10, ipady=10, columnspan=2)
+        self.click_interval_frame.grid(column=0, row=0, padx=10, pady=5, ipadx=10, ipady=10, columnspan=2)
+
+        self.click_option_frame = CustomClickOptionFrame(self)
+        self.click_option_frame.grid(column=0, row=1, padx=10, pady=5, ipadx=10, ipady=10, sticky="w")
 
 
 def main():
