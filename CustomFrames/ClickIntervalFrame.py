@@ -6,6 +6,7 @@ class CustomClickIntervalFrame(CTkFrame):
     Y_PADDING = (5, 5)
     X_ENTRY_PADDING = (2, 0)
     X_LABEL_PADDING = (10, 0)
+
     def __init__(self, parent):
         """
         Initializes a frame for user input of the desired click interval.
