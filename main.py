@@ -14,10 +14,7 @@
 #    You should have received a copy of the GNU General Public License
 #    along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
-#    [AutoClicker](https://github.com/Nikolai558/AutoClicker) Copyright (C) 2024 [Nikolai558](https://github.com/Nikolai558)
-#    This program comes with ABSOLUTELY NO WARRANTY; for details type `show w'.
-#    This is free software, and you are welcome to redistribute it
-#    under certain conditions; type `show c' for details.
+# [AutoClicker](https://github.com/Nikolai558/AutoClicker) Copyright (C) 2024 [Nikolai558](https://github.com/Nikolai558)
 
 
 import customtkinter
