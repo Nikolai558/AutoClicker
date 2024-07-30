@@ -1,3 +1,6 @@
+# [AutoClicker](https://github.com/Nikolai558/AutoClicker) Copyright (C) 2024 [Nikolai558](https://github.com/Nikolai558)
+
+
 from tkinter import IntVar
 from customtkinter import CTkFrame, CTkRadioButton, CTkLabel
 from CustomWidgets import CustomTKEntry
