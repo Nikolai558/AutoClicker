@@ -1,3 +1,4 @@
 from .ClickIntervalFrame import CustomClickIntervalFrame
 from .ClickOptionFrame import CustomClickOptionFrame
 from .ClickRepeatFrame import CustomClickRepeatFrame
+from .CursorPositionFrame import CustomCursorPositionFrame
