@@ -24,7 +24,7 @@ class CustomCursorPositionFrame(CTkFrame):
         self.current_location_radio_button = CTkRadioButton(self, text="Current Location", variable=self.radio_var, value=1)
         self.pick_location_radio_button = CTkRadioButton(self, text="", variable=self.radio_var, value=2, width=10)
 
-        self.pick_location_button = CTkButton(self, text="Pick Location", width=100)
+        self.pick_location_button = CTkButton(self, text="Pick Location", width=100, state="disabled")
 
         self.x_label = CTkLabel(self, text="X")
         self.x_entry = CustomTKEntry(self, placeholder_text="0", width=40)

@@ -22,9 +22,9 @@ class CustomActionFrame(CTkFrame):
         self.columnconfigure(1, weight=1, minsize=210)
 
         self.start_button = CTkButton(self, text=f"Start ({self.START_KEY_STR})")
-        self.stop_button = CTkButton(self, text=f"Stop ({self.START_KEY_STR})")
-        self.hotkey_settings_button = CTkButton(self, text=f"Hotkey Setting")
-        self.record_playback_button = CTkButton(self, text=f"Record & Playback")
+        self.stop_button = CTkButton(self, text=f"Stop ({self.START_KEY_STR})", state="disabled")
+        self.hotkey_settings_button = CTkButton(self, text=f"Hotkey Setting", state="disabled")
+        self.record_playback_button = CTkButton(self, text=f"Record & Playback", state="disabled")
 
         self.start_button.grid(row=0, column=0, padx=(10, 20))
         self.hotkey_settings_button.grid(row=1, column=0, padx=(10, 20), pady=(0, 10))

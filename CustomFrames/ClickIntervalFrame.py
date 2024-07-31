@@ -42,3 +42,10 @@ class CustomClickIntervalFrame(CTkFrame):
         self.seconds_entry.grid(row=0, padx=self.X_ENTRY_PADDING, column=5, pady=self.Y_PADDING)
         self.milliseconds_label.grid(row=0, padx=self.X_LABEL_PADDING, column=6, pady=self.Y_PADDING)
         self.milliseconds_entry.grid(row=0, padx=self.X_ENTRY_PADDING, column=7, pady=self.Y_PADDING)
+
+    def get_total_interval(self):
+        hours = self.hours_entry.get_value()
+        minutes = self.minutes_entry.get_value()
+        seconds = self.seconds_entry.get_value()
+        milliseconds = self.milliseconds_entry.get_value()
+        return (hours * 60 * 60 * 1000) + (minutes * 60 * 1000) + (seconds * 1000) + milliseconds
