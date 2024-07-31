@@ -2,5 +2,4 @@
 
 
 from .EntryField import CustomTKEntry
-from .MouseTrackerWidget import MouseTrackerApp
-from .MouseTrackerWidget import get_mouse_position
+from .CoordinateField import CustomTKCoordinateWindow

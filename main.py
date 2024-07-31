@@ -1,5 +1,6 @@
 # [AutoClicker](https://github.com/Nikolai558/AutoClicker) Copyright (C) 2024 [Nikolai558](https://github.com/Nikolai558)
 # Automate mouse clicks and key presses with customizable intervals, repetition, and cursor positions.
+import time
 
 #    This program is free software: you can redistribute it and/or modify
 #    it under the terms of the GNU General Public License as published by
@@ -21,7 +22,8 @@ import keyboard
 import pyautogui
 import customtkinter
 from CustomFrames import CustomClickIntervalFrame, CustomClickOptionFrame, CustomClickRepeatFrame, CustomCursorPositionFrame, CustomActionFrame
-from CustomWidgets import get_mouse_position
+from CustomWidgets import CustomTKCoordinateWindow
+
 
 class App(customtkinter.CTk):
     HEIGHT = "350"
@@ -61,13 +63,12 @@ class App(customtkinter.CTk):
         self.cursor_position_frame.pick_location_button.configure(command=self.pick_location)
 
     def pick_location(self):
-        # position = get_mouse_position()
-        # if position:
-        #     x, y = position
-        #     self.cursor_position_frame.x_entry.configure(textvariable=x)
-        #     self.cursor_position_frame.y_entry.configure(textvariable=y)
-
-        raise NotImplementedError("Pick Location is not implemented yet")
+        self.coord_window = CustomTKCoordinateWindow(self)
+        self.wait_window(self.coord_window)  # Wait until the coordinate window is closed
+        if self.coord_window.selected_coords:
+            x, y = self.coord_window.selected_coords
+            # Update your main application with the selected coordinates
+            print(f"Selected Coordinates: {x}, {y}")
 
     def start(self):
         self._is_running = True
