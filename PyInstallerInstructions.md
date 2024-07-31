@@ -21,5 +21,5 @@ Then add the library folder like this:
 
 For the full command, you get something like this:
 ```bash
-pyinstaller --noconfirm --onedir -- windowed -- add-data "<path_from_above>/customtkinter;customtkinter/" "<path_to_python_script>"
+pyinstaller --noconfirm --onedir --windowed -n "AutoClicker" --add-data "README.md:." --add-data "LICENSE:." --add-data "<path_from_above>/customtkinter;customtkinter/" "<path_to_python_script>"
 ```
