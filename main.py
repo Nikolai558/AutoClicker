@@ -63,6 +63,7 @@ class App(customtkinter.CTk):
         self.cursor_position_frame.pick_location_button.configure(command=self.pick_location)
 
     def pick_location(self):
+        self.cursor_position_frame.radio_var.set(2)
         coord_window = CustomTKCoordinateWindow(self)
         self.wait_window(coord_window)  # Wait until the coordinate window is closed
         if coord_window.selected_coords:
