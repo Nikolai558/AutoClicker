@@ -16,15 +16,28 @@ action recording, and playback for efficient task automation.
 - **Record & Playback** [^1]: Record mouse movements and clicks, then replay them.
 
 ---
+
 ## Images
 ![image](https://github.com/user-attachments/assets/c4e4c57f-5bf2-476f-aa71-37e29b33c23b)
-
 
 ---
 
 ## Getting Started
 
-### Prerequisites
+### Prerequisites (EXE)
+- Windows OS
+
+### Installation (EXE)
+1) Download "AutoClicker.zip"
+2) Extract and place in any directory (keep all file contents together)
+3) (Optional) Right click on "AutoClicker.exe" and select "Send to Desktop"
+
+### Usage (EXE)
+1) Double click or Run the "AutoClicker.exe"
+2) Use the graphical interface to configure your automation settings.
+3) Click, or use the default hotkey `F6` to start clicking away.
+
+### Prerequisites (Code)
 - Python 3.12.x
 - All Required Python Packages
 
