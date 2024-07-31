@@ -8,18 +8,36 @@ action recording, and playback for efficient task automation.
 
 ## Features
 
-- **Custom Click Intervals** [^1]: Specify intervals in hours, minutes, seconds, and milliseconds.
-- **Click Options** [^1]: Choose between left, middle, and right mouse buttons, with single or double clicks, or key presses.
-- **Repeat Options** [^1]: Set a specific number of repeats, or repeat until stopped.
-- **Cursor Positioning** [^1]: Use current cursor location or specify coordinates.
-- **Hotkey Settings** [^1]: Configure a hotkey for starting and stopping the automation.
+- **Custom Click Intervals**: Specify intervals in hours, minutes, seconds, and milliseconds.
+- **Click Options** [^2]: Choose between left, middle, and right mouse buttons, with single or double clicks, or key presses.
+- **Repeat Options**: Set a specific number of repeats, or repeat until stopped.
+- **Cursor Positioning**: Use current cursor location or specify coordinates.
+- **Hotkey Settings**: Configure a hotkey for starting and stopping the automation.
 - **Record & Playback** [^1]: Record mouse movements and clicks, then replay them.
+
+---
+
+## Images
+![image](https://github.com/user-attachments/assets/c4e4c57f-5bf2-476f-aa71-37e29b33c23b)
 
 ---
 
 ## Getting Started
 
-### Prerequisites
+### Prerequisites (EXE)
+- Windows OS
+
+### Installation (EXE)
+1) Download "AutoClicker.zip"
+2) Extract and place in any directory (keep all file contents together)
+3) (Optional) Right click on "AutoClicker.exe" and select "Send to Desktop"
+
+### Usage (EXE)
+1) Double click or Run the "AutoClicker.exe"
+2) Use the graphical interface to configure your automation settings.
+3) Click, or use the default hotkey `F6` to start clicking away.
+
+### Prerequisites (Code)
 - Python 3.12.x
 - All Required Python Packages
 
@@ -63,4 +81,5 @@ Automate mouse clicks and key presses with customizable intervals, repetition, a
 ---
 
 [^1]: Work In Progress
+[^2]: Only Mouse buttons work at the moment. Key Presses are not implemented and have no functionality.
 
