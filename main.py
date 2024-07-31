@@ -61,11 +61,11 @@ class App(customtkinter.CTk):
         self.cursor_position_frame.pick_location_button.configure(command=self.pick_location)
 
     def pick_location(self):
-        position = get_mouse_position()
-        if position:
-            x, y = position
-            self.cursor_position_frame.x_entry.configure(textvariable=x)
-            self.cursor_position_frame.y_entry.configure(textvariable=y)
+        # position = get_mouse_position()
+        # if position:
+        #     x, y = position
+        #     self.cursor_position_frame.x_entry.configure(textvariable=x)
+        #     self.cursor_position_frame.y_entry.configure(textvariable=y)
 
         raise NotImplementedError("Pick Location is not implemented yet")
 
