@@ -1,6 +1,5 @@
 # [AutoClicker](https://github.com/Nikolai558/AutoClicker) Copyright (C) 2024 [Nikolai558](https://github.com/Nikolai558)
 # Automate mouse clicks and key presses with customizable intervals, repetition, and cursor positions.
-import time
 
 #    This program is free software: you can redistribute it and/or modify
 #    it under the terms of the GNU General Public License as published by
@@ -31,9 +30,11 @@ class App(customtkinter.CTk):
 
     def __init__(self):
         super().__init__()
-        keyboard.add_hotkey('F6', self.toggle_action)
         self._is_running = False
         self._task_id = None
+        self.current_hotkey_str = 'F6'
+        self.current_hotkey = None
+        self.hotkey_setting_active = False
 
         self.title('Personal AutoClicker')
         self.geometry(f'{self.WIDTH}x{self.HEIGHT}')
@@ -42,6 +43,7 @@ class App(customtkinter.CTk):
         self.create_frames()
         self.place_frames()
         self.configure_button_commands()
+        self.set_hotkey(self.current_hotkey_str)
 
     def create_frames(self):
         self.click_interval_frame = CustomClickIntervalFrame(self)
@@ -60,7 +62,41 @@ class App(customtkinter.CTk):
     def configure_button_commands(self):
         self.action_frame.start_button.configure(command=self.start)
         self.action_frame.stop_button.configure(command=self.stop)
+        self.action_frame.hotkey_settings_button.configure(command=self.start_hotkey_setting)
         self.cursor_position_frame.pick_location_button.configure(command=self.pick_location)
+
+    def set_hotkey(self, new_hotkey_str):
+        if self.current_hotkey is not None:
+            try:
+                keyboard.remove_hotkey(self.current_hotkey)
+            except KeyError as e:
+                print("KeyError: " + str(e))
+            except ValueError as e:
+                print("ValueError: " + str(e))
+        self.current_hotkey_str = new_hotkey_str
+        self.current_hotkey = keyboard.add_hotkey(self.current_hotkey_str, self.toggle_action)
+        self.update_button_texts()
+
+    def start_hotkey_setting(self):
+        self.hotkey_setting_active = True
+        self.action_frame.hotkey_settings_button.configure(text="Press any key...")
+
+        def on_key_press(event):
+            if self.hotkey_setting_active:
+                new_hotkey = event.name
+                self.set_hotkey(new_hotkey)
+                self.action_frame.hotkey_settings_button.configure(text="Hotkey Setting")
+                self.hotkey_setting_active = False
+                # keyboard.unhook_all()
+
+        # Listen for the next key press
+        keyboard.on_press(on_key_press)
+
+    def update_button_texts(self):
+        start_button_text = f"Start ({self.current_hotkey_str.upper()})"
+        stop_button_text = f"Stop ({self.current_hotkey_str.upper()})"
+        self.action_frame.start_button.configure(text=start_button_text)
+        self.action_frame.stop_button.configure(text=stop_button_text)
 
     def pick_location(self):
         self.cursor_position_frame.radio_var.set(2)
@@ -107,7 +143,6 @@ class App(customtkinter.CTk):
             self._task_id = self.after(interval, self.auto_click, interval, amount, click_amt, click_button, click_pos)
         elif self._is_running and amount == 0:
             self.stop()
-
 
     def stop(self):
         self._is_running = False
