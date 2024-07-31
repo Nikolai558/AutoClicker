@@ -11,6 +11,6 @@ class CustomTKEntry(CTkEntry):
     def get_value(self):
         current_value = self.get()
         if current_value and current_value != "":
-            return self.get()
+            return int(self.get())
         else:
-            return self.cget("placeholder_text")
+            return int(self.cget("placeholder_text"))

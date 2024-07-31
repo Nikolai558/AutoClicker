@@ -17,6 +17,7 @@
 # [AutoClicker](https://github.com/Nikolai558/AutoClicker) Copyright (C) 2024 [Nikolai558](https://github.com/Nikolai558)
 
 
+import keyboard
 import customtkinter
 from CustomFrames import CustomClickIntervalFrame, CustomClickOptionFrame, CustomClickRepeatFrame, CustomCursorPositionFrame, CustomActionFrame
 
@@ -27,28 +28,98 @@ class App(customtkinter.CTk):
 
     def __init__(self):
         super().__init__()
+        keyboard.add_hotkey('F6', self.toggle_action)
+        self._is_running = False
+        self._task_id = None
+
         self.title('Personal AutoClicker')
         self.geometry(f'{self.WIDTH}x{self.HEIGHT}')
         self.attributes('-topmost', True)
 
+        self.create_frames()
+        self.place_frames()
+        self.configure_button_commands()
+
+    def create_frames(self):
         self.click_interval_frame = CustomClickIntervalFrame(self)
-        self.click_interval_frame.grid(column=0, row=0, padx=10, pady=5, ipadx=10, ipady=10, columnspan=2)
-
         self.click_option_frame = CustomClickOptionFrame(self)
-        self.click_option_frame.grid(column=0, row=1, padx=(10, 0), pady=5, ipadx=10, ipady=10, sticky="w")
-
-        self.click_option_frame = CustomClickRepeatFrame(self)
-        self.click_option_frame.grid(column=1, row=1, padx=(0, 10), pady=5, ipadx=10, ipady=10, sticky="ne")
-
+        self.click_repeat_frame = CustomClickRepeatFrame(self)
         self.cursor_position_frame = CustomCursorPositionFrame(self)
-        self.cursor_position_frame.grid(column=0, row=2, padx=(10, 0), pady=5, ipadx=10, ipady=10, sticky="nw", columnspan=2)
-
         self.action_frame = CustomActionFrame(self)
+
+    def place_frames(self):
+        self.click_interval_frame.grid(column=0, row=0, padx=10, pady=5, ipadx=10, ipady=10, columnspan=2)
+        self.click_option_frame.grid(column=0, row=1, padx=(10, 0), pady=5, ipadx=10, ipady=10, sticky="w")
+        self.click_repeat_frame.grid(column=1, row=1, padx=(0, 10), pady=5, ipadx=10, ipady=10, sticky="ne")
+        self.cursor_position_frame.grid(column=0, row=2, padx=(10, 0), pady=5, ipadx=10, ipady=10, sticky="nw", columnspan=2)
         self.action_frame.grid(column=0, row=3, padx=(10, 0), pady=5, ipadx=10, ipady=10, columnspan=2, sticky="nsw")
+
+    def configure_button_commands(self):
+        self.action_frame.start_button.configure(command=self.start)
+        self.action_frame.stop_button.configure(command=self.stop)
+
+    def start(self):
+        self._is_running = True
+
+        # Disable the start button
+        self.action_frame.start_button.configure(state='disabled')
+
+        # Enable the Stop Button
+        self.action_frame.stop_button.configure(state='normal')
+
+        # Get all information from User input/selections
+        interval = self.click_interval_frame.get_total_interval()
+        mouse_button = self.click_option_frame.mouse_button_dropdown.get()
+        click_type = self.click_option_frame.click_type_dropdown.get()
+        repeat_duration = -1 if self.click_repeat_frame.radio_var.get() == 2 else self.click_repeat_frame.repeat_times_entry.get_value()
+        location = "current_location" if self.cursor_position_frame.radio_var.get() == 1 else (self.cursor_position_frame.x_entry.get_value(), self.cursor_position_frame.y_entry.get_value())
+
+        self.auto_click(interval, repeat_duration)  # TODO - Change Behavior if "Key Press" is selected.
+
+    def auto_click(self, interval, amount):
+        if self._is_running and (amount > 0 or amount == -1):
+            if amount > 0:
+                amount = amount - 1
+
+            print("clicking...")  # TODO - Replace this code with actual clicking.
+
+            self._task_id = self.after(interval, self.auto_click, interval, amount)
+        elif self._is_running and amount == 0:
+            self.stop()
+
+
+    def stop(self):
+        self._is_running = False
+
+        # Disable the stop Button
+        self.action_frame.stop_button.configure(state='disabled')
+
+        # Enable the Start Button
+        self.action_frame.start_button.configure(state='normal')
+
+        if self._task_id:
+            self.after_cancel(self._task_id)
+            self._task_id = None
+
+        # --- DEBUGGING CODE ---
+        print("Stopping Action")
+
+    def toggle_action(self):
+        if self._is_running:
+            self.stop()
+        else:
+            self.start()
+
+    def on_closing(self):
+        if self._is_running:
+            self.stop()
+        keyboard.unhook_all_hotkeys()
+        self.destroy()
 
 
 def main():
     app = App()
+    app.protocol('WM_DELETE_WINDOW', app.on_closing)
     app.mainloop()
 
 
