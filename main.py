@@ -18,6 +18,7 @@
 
 
 import keyboard
+import pyautogui
 import customtkinter
 from CustomFrames import CustomClickIntervalFrame, CustomClickOptionFrame, CustomClickRepeatFrame, CustomCursorPositionFrame, CustomActionFrame
 
@@ -69,21 +70,28 @@ class App(customtkinter.CTk):
 
         # Get all information from User input/selections
         interval = self.click_interval_frame.get_total_interval()
-        mouse_button = self.click_option_frame.mouse_button_dropdown.get()
+        mouse_button = self.click_option_frame.mouse_button_dropdown.get().upper()
         click_type = self.click_option_frame.click_type_dropdown.get()
         repeat_duration = -1 if self.click_repeat_frame.radio_var.get() == 2 else self.click_repeat_frame.repeat_times_entry.get_value()
-        location = "current_location" if self.cursor_position_frame.radio_var.get() == 1 else (self.cursor_position_frame.x_entry.get_value(), self.cursor_position_frame.y_entry.get_value())
+        location = None if self.cursor_position_frame.radio_var.get() == 1 else (self.cursor_position_frame.x_entry.get_value(), self.cursor_position_frame.y_entry.get_value())
 
-        self.auto_click(interval, repeat_duration)  # TODO - Change Behavior if "Key Press" is selected.
+        if click_type != "Key Press":
+            self.auto_click(interval, repeat_duration, 2 if click_type == "Double" else 1, mouse_button, location)
+        else:
+            # TODO - Implement key press feature call here.
+            self.stop()
 
-    def auto_click(self, interval, amount):
+    def auto_click(self, interval, amount, click_amt, click_button, click_pos=None):
         if self._is_running and (amount > 0 or amount == -1):
             if amount > 0:
                 amount = amount - 1
 
-            print("clicking...")  # TODO - Replace this code with actual clicking.
+            if click_pos:
+                pyautogui.click(clicks=click_amt, button=click_button, x=click_pos[0], y=click_pos[1])
+            else:
+                pyautogui.click(clicks=click_amt, button=click_button)
 
-            self._task_id = self.after(interval, self.auto_click, interval, amount)
+            self._task_id = self.after(interval, self.auto_click, interval, amount, click_amt, click_button, click_pos)
         elif self._is_running and amount == 0:
             self.stop()
 
@@ -101,9 +109,6 @@ class App(customtkinter.CTk):
             self.after_cancel(self._task_id)
             self._task_id = None
 
-        # --- DEBUGGING CODE ---
-        print("Stopping Action")
-
     def toggle_action(self):
         if self._is_running:
             self.stop()
@@ -120,7 +125,10 @@ class App(customtkinter.CTk):
 def main():
     app = App()
     app.protocol('WM_DELETE_WINDOW', app.on_closing)
-    app.mainloop()
+    try:
+        app.mainloop()
+    except KeyboardInterrupt:
+        app.on_closing()
 
 
 if __name__ == '__main__':
