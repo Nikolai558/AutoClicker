@@ -21,5 +21,18 @@ Then add the library folder like this:
 
 For the full command, you get something like this:
 ```bash
-pyinstaller --noconfirm --onedir --windowed -n "AutoClicker" --add-data "README.md:." --add-data "LICENSE:." --add-data "<path_from_above>/customtkinter;customtkinter/" "<path_to_python_script>"
+pyinstaller --noconfirm --clean --onedir --windowed -n "AutoClicker" --version-file "version_info.txt" --icon "./images/icons/auto_clicker_icon.ico" --contents-directory "_AutoClicker_internals" --add-data "images:images" --add-data "README.md:./README" --add-data "LICENSE:./LICENSE" --add-data "<path_from_above>/customtkinter;customtkinter/" "<path_to_script.py>"
 ```
+
+---
+## Step-By-Step Instructions
+1) Create a Pull Request for `Releases <- Main`
+2) Change the information required in `version_info.txt`
+3) Update Changelog (if one exists)
+4) Save and Commit Changes into the `Main` branch
+5) Follow instructions above using pyinstaller.
+6) Zip the AutoClicker file located in `dist`
+7) Complete the Pull Request
+8) Draft a new Release (version and tag should match version_info.txt)
+9) Upload the Zip Folder
+10) Publish the Release
