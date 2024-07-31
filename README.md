@@ -8,11 +8,11 @@ action recording, and playback for efficient task automation.
 
 ## Features
 
-- **Custom Click Intervals** [^1]: Specify intervals in hours, minutes, seconds, and milliseconds.
-- **Click Options** [^1]: Choose between left, middle, and right mouse buttons, with single or double clicks, or key presses.
-- **Repeat Options** [^1]: Set a specific number of repeats, or repeat until stopped.
-- **Cursor Positioning** [^1]: Use current cursor location or specify coordinates.
-- **Hotkey Settings** [^1]: Configure a hotkey for starting and stopping the automation.
+- **Custom Click Intervals**: Specify intervals in hours, minutes, seconds, and milliseconds.
+- **Click Options** [^2]: Choose between left, middle, and right mouse buttons, with single or double clicks, or key presses.
+- **Repeat Options**: Set a specific number of repeats, or repeat until stopped.
+- **Cursor Positioning**: Use current cursor location or specify coordinates.
+- **Hotkey Settings**: Configure a hotkey for starting and stopping the automation.
 - **Record & Playback** [^1]: Record mouse movements and clicks, then replay them.
 
 ---
@@ -63,4 +63,5 @@ Automate mouse clicks and key presses with customizable intervals, repetition, a
 ---
 
 [^1]: Work In Progress
+[^2]: Only Mouse buttons work at the moment. Key Presses are not implemented and have no functionality.
 
