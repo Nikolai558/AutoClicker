@@ -41,6 +41,7 @@ class App(customtkinter.CTk):
         self.title('Personal AutoClicker')
         self.geometry(f'{self.WIDTH}x{self.HEIGHT}')
         self.attributes('-topmost', True)
+        self.iconbitmap('images/icons/auto_clicker_icon.ico')
 
         self.create_frames()
         self.place_frames()
