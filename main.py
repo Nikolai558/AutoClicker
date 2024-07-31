@@ -32,9 +32,11 @@ class App(customtkinter.CTk):
         super().__init__()
         self._is_running = False
         self._task_id = None
+
         self.current_hotkey_str = 'F6'
         self.current_hotkey = None
         self.hotkey_setting_active = False
+        self.hotkey_listener = None
 
         self.title('Personal AutoClicker')
         self.geometry(f'{self.WIDTH}x{self.HEIGHT}')
@@ -87,10 +89,12 @@ class App(customtkinter.CTk):
                 self.set_hotkey(new_hotkey)
                 self.action_frame.hotkey_settings_button.configure(text="Hotkey Setting")
                 self.hotkey_setting_active = False
-                # keyboard.unhook_all()
+                if self.hotkey_listener:
+                    keyboard.unhook(self.hotkey_listener)
+                    self.hotkey_listener = None
 
         # Listen for the next key press
-        keyboard.on_press(on_key_press)
+        self.hotkey_listener = keyboard.on_press(on_key_press)
 
     def update_button_texts(self):
         start_button_text = f"Start ({self.current_hotkey_str.upper()})"
