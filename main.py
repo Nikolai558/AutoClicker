@@ -21,7 +21,7 @@ import keyboard
 import pyautogui
 import customtkinter
 from CustomFrames import CustomClickIntervalFrame, CustomClickOptionFrame, CustomClickRepeatFrame, CustomCursorPositionFrame, CustomActionFrame
-
+from CustomWidgets import get_mouse_position
 
 class App(customtkinter.CTk):
     HEIGHT = "350"
@@ -58,6 +58,16 @@ class App(customtkinter.CTk):
     def configure_button_commands(self):
         self.action_frame.start_button.configure(command=self.start)
         self.action_frame.stop_button.configure(command=self.stop)
+        self.cursor_position_frame.pick_location_button.configure(command=self.pick_location)
+
+    def pick_location(self):
+        position = get_mouse_position()
+        if position:
+            x, y = position
+            self.cursor_position_frame.x_entry.configure(textvariable=x)
+            self.cursor_position_frame.y_entry.configure(textvariable=y)
+
+        raise NotImplementedError("Pick Location is not implemented yet")
 
     def start(self):
         self._is_running = True
