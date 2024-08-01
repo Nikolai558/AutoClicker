@@ -22,7 +22,8 @@ import pyautogui
 import customtkinter
 import os.path
 import sys
-from CustomFrames import CustomClickIntervalFrame, CustomClickOptionFrame, CustomClickRepeatFrame, CustomCursorPositionFrame, CustomActionFrame
+from CustomFrames import CustomClickIntervalFrame, CustomClickOptionFrame
+from CustomFrames import CustomClickRepeatFrame, CustomCursorPositionFrame, CustomActionFrame
 from CustomWidgets import CustomTKCoordinateWindow
 
 
@@ -57,7 +58,6 @@ class App(customtkinter.CTk):
             base_path = sys._MEIPASS
         else:
             base_path = os.path.abspath(os.path.dirname(__file__))
-        self.title(base_path)
         self.iconbitmap(os.path.join(base_path, self._icon_path))
 
     def create_frames(self):
@@ -138,8 +138,16 @@ class App(customtkinter.CTk):
         interval = self.click_interval_frame.get_total_interval()
         mouse_button = self.click_option_frame.mouse_button_dropdown.get().upper()
         click_type = self.click_option_frame.click_type_dropdown.get()
-        repeat_duration = -1 if self.click_repeat_frame.radio_var.get() == 2 else self.click_repeat_frame.repeat_times_entry.get_value()
-        location = None if self.cursor_position_frame.radio_var.get() == 1 else (self.cursor_position_frame.x_entry.get_value(), self.cursor_position_frame.y_entry.get_value())
+
+        if self.click_repeat_frame.radio_var.get() == 2:
+            repeat_duration = -1
+        else:
+            repeat_duration = self.click_repeat_frame.repeat_times_entry.get_value()
+
+        if self.cursor_position_frame.radio_var.get() == 1:
+            location = None
+        else:
+            location = (self.cursor_position_frame.x_entry.get_value(), self.cursor_position_frame.y_entry.get_value())
 
         if click_type != "Key Press":
             self.auto_click(interval, repeat_duration, 2 if click_type == "Double" else 1, mouse_button, location)
