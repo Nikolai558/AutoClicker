@@ -20,6 +20,8 @@
 import keyboard
 import pyautogui
 import customtkinter
+import os.path
+import sys
 from CustomFrames import CustomClickIntervalFrame, CustomClickOptionFrame, CustomClickRepeatFrame, CustomCursorPositionFrame, CustomActionFrame
 from CustomWidgets import CustomTKCoordinateWindow
 
@@ -30,6 +32,8 @@ class App(customtkinter.CTk):
 
     def __init__(self):
         super().__init__()
+        self._icon_path = os.path.join("images", "icons", "auto_clicker_icon.ico")
+
         self._is_running = False
         self._task_id = None
 
@@ -41,12 +45,20 @@ class App(customtkinter.CTk):
         self.title('Personal AutoClicker')
         self.geometry(f'{self.WIDTH}x{self.HEIGHT}')
         self.attributes('-topmost', True)
-        self.iconbitmap('images/icons/auto_clicker_icon.ico')
+        self.set_icon()
 
         self.create_frames()
         self.place_frames()
         self.configure_button_commands()
         self.set_hotkey(self.current_hotkey_str)
+
+    def set_icon(self):
+        if getattr(sys, 'frozen', False):
+            base_path = sys._MEIPASS
+        else:
+            base_path = os.path.abspath(os.path.dirname(__file__))
+        self.title(base_path)
+        self.iconbitmap(os.path.join(base_path, self._icon_path))
 
     def create_frames(self):
         self.click_interval_frame = CustomClickIntervalFrame(self)
