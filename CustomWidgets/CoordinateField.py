@@ -45,6 +45,3 @@ class CustomTKCoordinateWindow(CTkToplevel):
         if self.mouse_listener:
             self.mouse_listener.stop()
         super().destroy()
-
-
-
